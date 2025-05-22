@@ -15,7 +15,7 @@ export async function loader({ request }: { request: Request }) {
       orderBy: orderBy
     });
 
-    // fix i with BigInt valueslues
+    // fix issue with BigInt values
     const serializedCompanies = companies.map(company => ({
       ...company,
       last_funding_amount: company.last_funding_amount ? company.last_funding_amount.toString() : null
