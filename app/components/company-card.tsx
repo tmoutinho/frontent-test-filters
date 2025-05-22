@@ -10,7 +10,7 @@ import {
   Image,
   Box,
 } from "@chakra-ui/react";
-import type { Company } from "types/companies";
+import type { Company } from "~/types/companies";
 import { formatFundingAmount } from "~/utils";
 import { memo } from "react";
 
