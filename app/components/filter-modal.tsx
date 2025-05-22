@@ -28,7 +28,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { BiFilter } from "react-icons/bi";
-import type { Filters } from "~/types/app";
+import type { Filters } from "types/app";
 import { customerFocusOptions, fundingTypeOptions, growthStageOptions, MAX_FUNDING_AMOUNT, MAX_RANK } from "~/utils/mocks-data";
 import { formatFundingAmount } from "~/utils";
 
@@ -156,6 +156,7 @@ export default function FilterModal({
           overflowY="auto"
         >
           <VStack spacing={6} align="stretch">
+            {/* Growth Stage Filter */}
             <Box>
               <Heading size="sm" mb={2}>Growth Stage</Heading>
               <SimpleGrid columns={2} spacing={2}>
@@ -175,6 +176,7 @@ export default function FilterModal({
 
             <Divider />
 
+            {/* Customer Focus Filter */}
             <Box>
               <Heading size="sm" mb={2}>Customer Focus</Heading>
               <SimpleGrid columns={2} spacing={2}>
@@ -194,6 +196,7 @@ export default function FilterModal({
 
             <Divider />
 
+            {/* Funding Type Filter */}
             <Box>
               <Heading size="sm" mb={2}>Funding Type</Heading>
               <Select
@@ -211,7 +214,6 @@ export default function FilterModal({
                   </option>
                 ))}
               </Select>
-
               {localFilters.fundingType.length > 0 && (
                 <Wrap mt={2} spacing={2}>
                   {localFilters.fundingType.map(type => (
@@ -228,6 +230,7 @@ export default function FilterModal({
 
             <Divider />
 
+            {/* Rank Range Filter */}
             <Box>
               <FormLabel htmlFor="rank-range" display="flex" justifyContent="space-between">
                 <Text>Rank Range</Text>
@@ -254,6 +257,7 @@ export default function FilterModal({
 
             <Divider />
 
+            {/* Funding Amount Filter */}
             <Box>
               <FormLabel htmlFor="funding-range" display="flex" justifyContent="space-between">
                 <Text>Funding Amount</Text>

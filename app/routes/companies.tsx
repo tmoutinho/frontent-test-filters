@@ -15,8 +15,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useState, useCallback } from "react";
-import type { Filters, SortOption } from "~/types/app";
-import type { Company } from "~/types/companies";
+import type { Filters, SortOption } from "types/app";
+import type { Company } from "types/companies";
 import ActiveFilterTags from "~/components/active-filter-tags";
 import CompanyCard from "~/components/company-card";
 import FilterChips from "~/components/popular-filters";
@@ -39,6 +39,16 @@ export default function Companies() {
   });
   const [activeSort, setActiveSort] = useState<SortOption | null>(null);
 
+  // create a memoized search handler
+  const handleSearchChange = useCallback((value: string) => {
+    setSearchQuery(value);
+  }, []);
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["companies", activeFilters, searchQuery, activeSort],
+    queryFn: () => fetchCompanies(activeFilters, searchQuery, activeSort || undefined)
+  });
+
   // check if filters are active
   const hasActiveFilters =
     activeFilters.growthStage.length > 0 ||
@@ -48,16 +58,6 @@ export default function Companies() {
     activeFilters.rankRange[1] < MAX_RANK ||
     activeFilters.fundingAmountRange[0] > 0 ||
     activeFilters.fundingAmountRange[1] < MAX_FUNDING_AMOUNT;
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["companies", activeFilters, searchQuery, activeSort],
-    queryFn: () => fetchCompanies(activeFilters, searchQuery, activeSort || undefined)
-  });
-
-  // create a memoized search handler
-  const handleSearchChange = useCallback((value: string) => {
-    setSearchQuery(value);
-  }, []);
 
   // clear all filters
   const clearAllFilters = () => {
@@ -125,6 +125,7 @@ export default function Companies() {
       }}
     >
       <Container maxW="container.xl">
+        {/* Header */}
         <Flex direction="column" alignItems="center" mb={6}>
           <Image src="/specter.svg" alt="Specter" h={8} mb={6} />
           <Heading
@@ -141,6 +142,7 @@ export default function Companies() {
             Browse and discover companies from our database
           </Text>
 
+          {/* Search Bar */}
           <SearchBar
             searchQuery={searchQuery}
             onSearchChange={handleSearchChange}
@@ -148,12 +150,14 @@ export default function Companies() {
             hasActiveFilters={hasActiveFilters}
           />
 
+          {/* Quick Filter Chips */}
           <FilterChips
             activeGrowthStages={activeFilters.growthStage}
             activeCustomerFocus={activeFilters.customerFocus}
             toggleFilter={toggleFilter}
           />
 
+          {/* Active Filters */}
           <ActiveFilterTags
             activeFilters={activeFilters}
             maxRank={MAX_RANK}
@@ -164,6 +168,7 @@ export default function Companies() {
           />
         </Flex>
 
+        {/* Filter Modal */}
         <FilterModal
           isOpen={isFiltersModalOpen}
           onClose={() => setIsFiltersModalOpen(false)}
@@ -171,6 +176,7 @@ export default function Companies() {
           setActiveFilters={setActiveFilters}
         />
 
+        {/* Content */}
         <Box
           as={motion.div}
           initial={{ opacity: 0, y: 12, filter: "blur(3px)" }}
@@ -187,6 +193,7 @@ export default function Companies() {
             </Alert>
           ) : (
             <>
+              {/* Results counter and sort selector */}
               <SortSelect
                 activeSort={activeSort}
                 handleSortChange={(option: SortOption) => setActiveSort(option)}
