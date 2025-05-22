@@ -68,12 +68,10 @@ export function filtersToParams(
     params.minFundingAmount = filters.fundingAmountRange[0];
   }
 
-  // Only add maxFundingAmount if it's not at max value
   if (filters.fundingAmountRange[1] < MAX_FUNDING_AMOUNT) {
     params.maxFundingAmount = filters.fundingAmountRange[1];
   }
 
-  // Add sorting parameters if provided
   if (sortOption) {
     params.sortId = sortOption.id;
   }

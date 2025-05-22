@@ -39,7 +39,7 @@ interface FilterModalProps {
   setActiveFilters: (filters: Filters) => void;
 }
 
-// Add local state so that we dont refetch the companies on every click or change filter
+// add local state so that we dont refetch the companies on every click or change filter
 export default function FilterModal({
   isOpen,
   onClose,
@@ -110,24 +110,20 @@ export default function FilterModal({
     onClose();
   };
 
-  // Check if filters have changed
+  // check if filters have changed
   const hasFilterChanges = useMemo(() => {
-    // Compare growth stage arrays
     const growthStageChanged =
       localFilters.growthStage.length !== activeFilters.growthStage.length ||
       localFilters.growthStage.some(stage => !activeFilters.growthStage.includes(stage));
 
-    // Compare customer focus arrays
     const customerFocusChanged =
       localFilters.customerFocus.length !== activeFilters.customerFocus.length ||
       localFilters.customerFocus.some(focus => !activeFilters.customerFocus.includes(focus));
 
-    // Compare funding type arrays
     const fundingTypeChanged =
       localFilters.fundingType.length !== activeFilters.fundingType.length ||
       localFilters.fundingType.some(type => !activeFilters.fundingType.includes(type));
 
-    // Compare range values
     const rankRangeChanged =
       localFilters.rankRange[0] !== activeFilters.rankRange[0] ||
       localFilters.rankRange[1] !== activeFilters.rankRange[1];

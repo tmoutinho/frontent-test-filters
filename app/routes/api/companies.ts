@@ -31,7 +31,6 @@ export async function loader({ request }: { request: Request }) {
 }
 
 function buildFilterConditions(params: URLSearchParams) {
-  // Extract filter parameters
   const search = params.get('search');
   const growthStage = params.get('growthStage');
   const customerFocus = params.get('customerFocus');
@@ -41,16 +40,12 @@ function buildFilterConditions(params: URLSearchParams) {
   const minFundingAmount = params.get('minFundingAmount');
   const maxFundingAmount = params.get('maxFundingAmount');
 
-  // Build the filter conditions
   const filter: any = {};
-  // Extract sort parameters
   const sortId = params.get('sortId');
 
-  // Build dynamic orderBy configuration
-  let orderBy: any = { rank: 'asc' }; // Default sort
+  let orderBy: any = { rank: 'asc' };
 
   if (sortId) {
-    // Find the matching sort option
     const sortOption = sortOptions.find(option => option.id === sortId);
 
     if (sortOption) {
@@ -58,7 +53,6 @@ function buildFilterConditions(params: URLSearchParams) {
     }
   }
 
-  // Text search filter
   if (search) {
     filter.OR = [
       { name: { contains: search, mode: 'insensitive' } },
@@ -67,7 +61,6 @@ function buildFilterConditions(params: URLSearchParams) {
     ];
   }
 
-  // Growth stage filter
   if (growthStage) {
     const stages = growthStage.split(',');
     filter.growth_stage = {
@@ -76,7 +69,6 @@ function buildFilterConditions(params: URLSearchParams) {
     };
   }
 
-  // Customer focus filter
   if (customerFocus) {
     const focuses = customerFocus.split(',');
     filter.customer_focus = {
@@ -85,7 +77,6 @@ function buildFilterConditions(params: URLSearchParams) {
     };
   }
 
-  // Funding type filter
   if (fundingType) {
     const types = fundingType.split(',');
     filter.last_funding_type = {
@@ -94,7 +85,6 @@ function buildFilterConditions(params: URLSearchParams) {
     };
   }
 
-  // Rank range filter
   if (minRank || maxRank) {
     filter.rank = {};
 
@@ -107,7 +97,6 @@ function buildFilterConditions(params: URLSearchParams) {
     }
   }
 
-  // Funding amount range filter
   if (minFundingAmount || maxFundingAmount) {
     filter.last_funding_amount = {};
 

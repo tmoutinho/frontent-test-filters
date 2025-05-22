@@ -29,8 +29,6 @@ import { MAX_RANK } from "~/utils/mocks-data";
 
 export default function Companies() {
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false);
-
-  // Search and filter state
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilters, setActiveFilters] = useState<Filters>({
     growthStage: [],
@@ -39,17 +37,9 @@ export default function Companies() {
     rankRange: [0, MAX_RANK],
     fundingAmountRange: [0, MAX_FUNDING_AMOUNT],
   });
-
-
-  // Sorting state
   const [activeSort, setActiveSort] = useState<SortOption | null>(null);
 
-  // Handle sort option change
-  const handleSortChange = (option: SortOption) => {
-    setActiveSort(option);
-  };
-
-  // Create a memoized search handler
+  // create a memoized search handler
   const handleSearchChange = useCallback((value: string) => {
     setSearchQuery(value);
   }, []);
@@ -59,7 +49,7 @@ export default function Companies() {
     queryFn: () => fetchCompanies(activeFilters, searchQuery, activeSort || undefined)
   });
 
-  // Check if filters are active
+  // check if filters are active
   const hasActiveFilters =
     activeFilters.growthStage.length > 0 ||
     activeFilters.customerFocus.length > 0 ||
@@ -69,7 +59,7 @@ export default function Companies() {
     activeFilters.fundingAmountRange[0] > 0 ||
     activeFilters.fundingAmountRange[1] < MAX_FUNDING_AMOUNT;
 
-  // Clear all filters
+  // clear all filters
   const clearAllFilters = () => {
     setSearchQuery("");
     setActiveFilters({
@@ -81,8 +71,6 @@ export default function Companies() {
 
     });
   };
-
-  // Remove single filter
   const removeFilter = (type: keyof Filters, value?: string) => {
     if (type === "growthStage" || type === "customerFocus" || type === "fundingType") {
       if (value) {
@@ -104,7 +92,6 @@ export default function Companies() {
     }
   };
 
-  // Toggle a filter value
   const toggleFilter = (type: "growthStage" | "customerFocus" | "fundingType", value: string) => {
     setActiveFilters(prev => {
       const current = prev[type];
@@ -208,7 +195,7 @@ export default function Companies() {
               {/* Results counter and sort selector */}
               <SortSelect
                 activeSort={activeSort}
-                handleSortChange={handleSortChange}
+                handleSortChange={(option: SortOption) => setActiveSort(option)}
                 companiesCount={data?.companies.length || 0}
               />
 

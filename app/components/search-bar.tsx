@@ -35,18 +35,15 @@ export default function SearchBar({
     const value = e.target.value;
     setLocalSearch(value);
 
-    // Clear any existing timer
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
     }
 
-    // Set a new timer for the debounced search
     debounceTimerRef.current = setTimeout(() => {
       onSearchChange(value);
     }, debounceTime);
   };
 
-  // Clean up timer on unmount
   useEffect(() => {
     return () => {
       if (debounceTimerRef.current) {
