@@ -4,7 +4,7 @@ import { HiArrowRight } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "New React Router App" },
     { name: "description", content: "Welcome to React Router!" },
@@ -58,6 +58,14 @@ export default function Home() {
           to="/test"
         >
           Get Started
+        </Button>
+        <Button
+          variant="outline"
+          rightIcon={<HiArrowRight />}
+          as={Link}
+          to="/companies"
+        >
+          Companies
         </Button>
       </Box>
     </Center>

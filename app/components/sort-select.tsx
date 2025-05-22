@@ -1,6 +1,6 @@
 import { Flex, Text, Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { BiSortAlt2 } from "react-icons/bi";
-import type { SortOption } from "types/app";
+import type { SortOption } from "~/types/app";
 import { sortOptions } from "~/utils/mocks-data";
 
 interface SortSelectProps {

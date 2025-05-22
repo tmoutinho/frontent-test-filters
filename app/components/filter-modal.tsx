@@ -28,7 +28,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { BiFilter } from "react-icons/bi";
-import type { Filters } from "types/app";
+import type { Filters } from "~/types/app";
 import { customerFocusOptions, fundingTypeOptions, growthStageOptions, MAX_FUNDING_AMOUNT, MAX_RANK } from "~/utils/mocks-data";
 import { formatFundingAmount } from "~/utils";
 

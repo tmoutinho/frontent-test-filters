@@ -15,8 +15,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useState, useCallback } from "react";
-import type { Filters, SortOption } from "types/app";
-import type { Company } from "types/companies";
+import type { Filters, SortOption } from "~/types/app";
+import type { Company } from "~/types/companies";
 import ActiveFilterTags from "~/components/active-filter-tags";
 import CompanyCard from "~/components/company-card";
 import FilterChips from "~/components/popular-filters";

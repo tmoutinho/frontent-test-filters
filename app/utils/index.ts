@@ -1,5 +1,5 @@
-import type { Filters, FilterParams, SortOption } from "types/app";
-import type { Company } from "types/companies";
+import type { Filters, FilterParams, SortOption } from "~/types/app";
+import type { Company } from "~/types/companies";
 import { MAX_FUNDING_AMOUNT, MAX_RANK } from "./mocks-data";
 
 export const formatFundingAmount = (amount: number) => {

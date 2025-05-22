@@ -1,5 +1,5 @@
 import { Button, Flex, Tag, TagCloseButton, TagLabel, Wrap, WrapItem } from "@chakra-ui/react";
-import type { Filters } from "types/app";
+import type { Filters } from "~/types/app";
 import { formatFundingAmount } from "~/utils";
 import { customerFocusOptions, growthStageOptions } from "~/utils/mocks-data";
 
